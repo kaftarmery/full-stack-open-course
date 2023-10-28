@@ -1,29 +1,34 @@
 const App = () => {
   const course = "Half Stack application development";
-
-  const part1 = {
-    name: "Fundamentals of React",
-    exercises: 10,
-  };
-
-  const part2 = {
-    name: "Using props to pass data",
-    exercises: 7,
-  };
-
-  const part3 = {
-    name: "State of a component",
-    exercises: 14,
-  };
+  const parts = [
+    {
+      name: "Fundamentals of React",
+      exercises: 10,
+    },
+    {
+      name: "Using props to pass data",
+      exercises: 7,
+    },
+    {
+      name: "State of a component",
+      exercises: 14,
+    },
+  ];
 
   const Header = (props) => {
     return <h1>{props.course}</h1>;
   };
 
   const Total = (props) => {
+    // USED REDUCE TO GET THE FUM OF THE ARRAY
     return (
       <>
-        <p>Total of exercises: {props.totalExercises}</p>
+        <p>
+          Total of exercises:{" "}
+          {props.parts.reduce((a, e) => {
+            return a + e.exercises;
+          }, 0)}
+        </p>
       </>
     );
   };
@@ -32,20 +37,23 @@ const App = () => {
     return (
       <>
         <p>
-          {/* instead of writing "props.part1/part2/part3 and props.exercises1/exercises2. We simply named the two "props" as part and exercise.
-          Later in the Content component, we'll ASSIGN whatever value we want for the props to render. */}
-          {props.part} {props.exercises}
+          {/* {props.part} {props.exercises} */}
+          {props.parts.name} {props.parts.exercises}
         </p>
       </>
     );
   };
 
-  const Content = () => {
+  const Content = (props) => {
     return (
       <>
-        <Part part={part1.name} exercises={part1.exercises} />
-        <Part part={part2.name} exercises={part2.exercises} />
-        <Part part={part3.name} exercises={part3.exercises} />
+        {/* <Part part={parts[0].name} exercises={parts[0].exercises} />
+        <Part part={parts[1].name} exercises={parts[1].exercises} />
+        <Part part={parts[2].name} exercises={parts[2].exercises} /> */}
+
+        <Part parts={props.parts[0]} />
+        <Part parts={props.parts[1]} />
+        <Part parts={props.parts[2]} />
       </>
     );
   };
@@ -54,12 +62,14 @@ const App = () => {
   return (
     <div>
       <Header course={course} />
-      <Content />
-      <Total
-        totalExercises={part1.exercises + part2.exercises + part3.exercises}
-      />
+      <Content parts={parts} />
+      <Total parts={parts} />
     </div>
   );
 };
 
 export default App;
+
+// totalExercises={
+//   parts[0].exercises + parts[1].exercises + parts[2].exercises
+// }
