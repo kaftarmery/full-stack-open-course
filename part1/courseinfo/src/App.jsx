@@ -26,7 +26,7 @@ const App = () => {
     return (
       <>
         <p>
-          {partName} - {theExercise}
+          {partName} ({theExercise})
         </p>
       </>
     );
@@ -65,7 +65,3 @@ const App = () => {
 };
 
 export default App;
-
-// totalExercises={
-//   parts[0].exercises + parts[1].exercises + parts[2].exercises
-// }
