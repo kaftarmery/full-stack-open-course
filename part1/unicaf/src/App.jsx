@@ -9,8 +9,7 @@ const App = () => {
 
   const [all, setAll] = useState(0);
   const [average, setAverage] = useState(0);
-
-  const positiveFeedback = all ? ((good / all) * 100).toFixed(2) : "0.00";
+  const positive = all ? ((good / all) * 100).toFixed(2) : "0.00";
 
   // update the states
   const handleGood = () => {
@@ -38,17 +37,15 @@ const App = () => {
       <Buttons onClick={handleNeutral} text="neutral" />
       <Buttons onClick={handleBad} text="bad" />
 
-      <hr />
-      <h2>Statistics:</h2>
-      <Statistics state="good" stats={good} />
-      <Statistics state="neutral" stats={neutral} />
-      <Statistics state="bad" stats={bad} />
-
-      <hr />
-
-      <p>All: {all}</p>
-      <p>Average: {average}</p>
-      <p>Positive: {positiveFeedback}</p>
+      <h2>statistics</h2>
+      <Statistics
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        all={all}
+        average={average}
+        positive={positive}
+      />
     </div>
   );
 };
