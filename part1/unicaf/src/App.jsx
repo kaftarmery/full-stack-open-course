@@ -1,8 +1,29 @@
 import { useState } from "react";
 import Buttons from "./Buttons";
-import Statistics from "./Statistics";
+import StatisticLine from "./StatisticLine";
 
 const App = () => {
+  const Statistics = () => {
+    if (all === 0) {
+      return (
+        <>
+          <p>No feedback given.</p>
+        </>
+      );
+    }
+
+    return (
+      <>
+        <StatisticLine lebel="good" stat={good} />
+        <StatisticLine lebel="neutral" stat={neutral} />
+        <StatisticLine lebel="bad" stat={bad} />
+        <StatisticLine lebel="all" stat={all} />
+        <StatisticLine lebel="average" stat={average} />
+        <StatisticLine lebel="positive" stat={positive} />
+      </>
+    );
+  };
+
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
@@ -38,14 +59,8 @@ const App = () => {
       <Buttons onClick={handleBad} text="bad" />
 
       <h2>statistics</h2>
-      <Statistics
-        good={good}
-        neutral={neutral}
-        bad={bad}
-        all={all}
-        average={average}
-        positive={positive}
-      />
+
+      <Statistics />
     </div>
   );
 };
