@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Buttons from "./Buttons";
 import StatisticLine from "./StatisticLine";
 
 const App = () => {
-  const Statistics = () => {
+  const Statistics = (props) => {
     if (all === 0) {
       return (
         <>
@@ -33,30 +33,29 @@ const App = () => {
   const positive = all ? ((good / all) * 100).toFixed(2) : "0.00";
 
   // update the states
-  const handleGood = () => {
+  const handleGoodClick = () => {
     setGood(good + 1);
-    setAll(good + neutral + bad + 1);
-    setAverage((good + neutral + bad) / 3);
   };
 
-  const handleNeutral = () => {
+  const handleNeutralClick = () => {
     setNeutral(neutral + 1);
-    setAll(good + neutral + bad + 1);
-    setAverage((good + neutral + bad) / 3);
   };
 
-  const handleBad = () => {
+  const handleBadClick = () => {
     setBad(bad + 1);
-    setAll(good + neutral + bad + 1);
-    setAverage((good + neutral + bad) / 3);
   };
+
+  useEffect(() => {
+    setAll(good + neutral + bad);
+    setAverage((good - bad) / (good + neutral + bad));
+  }, [good, neutral, bad]);
 
   return (
     <div>
       <h1>give feedback</h1>
-      <Buttons onClick={handleGood} text="good" />
-      <Buttons onClick={handleNeutral} text="neutral" />
-      <Buttons onClick={handleBad} text="bad" />
+      <Buttons onClick={handleGoodClick} text="good" />
+      <Buttons onClick={handleNeutralClick} text="neutral" />
+      <Buttons onClick={handleBadClick} text="bad" />
 
       <h2>statistics</h2>
 
