@@ -1,13 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 
-const StatisticLine = (props) => {
+const StatisticLine = ({ lebel, stat }) => {
   return (
-    <>
-      <div>
-        {props.lebel} : {props.stat}
-      </div>
-    </>
+    <table>
+      <td>{lebel}: </td>
+      <td>{stat}</td>
+    </table>
   );
 };
 

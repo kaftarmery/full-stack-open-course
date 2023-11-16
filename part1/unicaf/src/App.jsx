@@ -3,7 +3,7 @@ import Buttons from "./Buttons";
 import StatisticLine from "./StatisticLine";
 
 const App = () => {
-  const Statistics = (props) => {
+  const Statistics = () => {
     if (all === 0) {
       return (
         <>
@@ -11,16 +11,17 @@ const App = () => {
         </>
       );
     }
-
     return (
-      <>
-        <StatisticLine lebel="good" stat={good} />
-        <StatisticLine lebel="neutral" stat={neutral} />
-        <StatisticLine lebel="bad" stat={bad} />
-        <StatisticLine lebel="all" stat={all} />
-        <StatisticLine lebel="average" stat={average} />
-        <StatisticLine lebel="positive" stat={positive} />
-      </>
+      <table>
+        <tbody>
+          <StatisticLine lebel="Good" stat={good} />
+          <StatisticLine lebel="Neutral" stat={neutral} />
+          <StatisticLine lebel="Bad" stat={bad} />
+          <StatisticLine lebel="All" stat={all} />
+          <StatisticLine lebel="Average" stat={average} />
+          <StatisticLine lebel="Positive" stat={positive} />
+        </tbody>
+      </table>
     );
   };
 
@@ -58,7 +59,6 @@ const App = () => {
       <Buttons onClick={handleBadClick} text="bad" />
 
       <h2>statistics</h2>
-
       <Statistics />
     </div>
   );
