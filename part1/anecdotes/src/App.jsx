@@ -21,19 +21,39 @@ const App = () => {
 
   // voting system
   const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0));
-  const giveVote = () => {
-    const newVotes = [...votes];
+
+  const giveLike = () => {
+    let newVotes = [...votes];
     newVotes[selected] += 1;
     setVotes(newVotes);
   };
 
+  const MostLiked = () => {
+    let mostLiked = Math.max(...votes);
+    let maxIndex = votes.indexOf(mostLiked);
+    if (mostLiked > 0) {
+      return (
+        <>
+          <p>{anecdotes[maxIndex]}</p>
+          <p>{mostLiked}</p>
+        </>
+      );
+    } else {
+      return "no votes yet";
+    }
+  };
   return (
     <>
+      <h1>Anecdote of the day</h1>
       <p> {anecdotes[selected]} </p>
-      <p> has {votes[selected]} votes </p>
+      <p> has {votes[selected]} likes </p>
 
-      <button onClick={giveVote}>vote</button>
+      <button onClick={giveLike}>Like</button>
+
       <button onClick={getRandomAnecdote}>next anecdote</button>
+
+      <h1>Anecdote with most likes</h1>
+      <MostLiked />
     </>
   );
 };
